@@ -1,7 +1,3 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
-use App\Services\DistributeFriendsService;
-
-(new DistributeFriendsService())->execute();
+require_once __DIR__ . '/api/public/index.php';

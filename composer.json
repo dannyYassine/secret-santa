@@ -1,0 +1,54 @@
+{
+  "name": "dannyyassine/secret-santa",
+  "authors": [
+    {
+      "name": "Danny",
+      "email": "dannyyassine@gmail.com"
+    }
+  ],
+  "type": "project",
+  "description": "The Laravel Framework.",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.3|^8.0",
+    "fideloper/proxy": "^4.4",
+    "fruitcake/laravel-cors": "^2.0",
+    "guzzlehttp/guzzle": "^7.0.1",
+    "laravel/framework": "^8.12",
+    "laravel/tinker": "^2.5",
+    "phpmailer/phpmailer": "^6.1"
+  },
+  "require-dev": {
+    "facade/ignition": "^2.5",
+    "fakerphp/faker": "^1.9.1",
+    "mockery/mockery": "^1.4.2",
+    "nunomaduro/collision": "^5.0",
+    "phpunit/phpunit": "^9.3.3"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "api/app/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
+  }
+}

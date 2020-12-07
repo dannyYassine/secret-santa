@@ -47,8 +47,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "compile": [
-      "mv -v api/*"
+    "preinstall": [
+      "mv -v api/* ."
     ]
   }
 }

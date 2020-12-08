@@ -3,6 +3,7 @@
 namespace App\Module\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
+use App\Module\Services\DistributeFriendsDTO;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Module\Services\DistributeFriendsService;
@@ -18,6 +19,10 @@ class DistributeController extends BaseController
 
     protected function index(Request $request): Response
     {
-        return $this->buildResponse($this->distributeFriendsService->execute());
+        return $this->buildResponse(
+            $this->distributeFriendsService->execute(
+                new DistributeFriendsDTO($request)
+            )
+        );
     }
 }

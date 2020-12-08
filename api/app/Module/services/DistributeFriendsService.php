@@ -24,7 +24,7 @@ class DistributeFriendsService
         $this->friendRepository = new FriendRepository();
     }
 
-    public function execute(): bool
+    public function execute(DistributeFriendsDTO $dto): bool
     {
 
         return 'ready';

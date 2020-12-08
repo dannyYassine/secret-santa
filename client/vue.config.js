@@ -30,7 +30,7 @@ module.exports = {
       },
       plugins: [
         new WebpackBar({
-          name: 'ClearEstate Client',
+          name: 'Client',
           reporters: ['fancy', 'profile'],
           profile: true
         })

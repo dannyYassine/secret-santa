@@ -9,15 +9,12 @@ push-api-heroku:
 push-client-firebase:
 	firebase deploy
 deploy-api:
-	cd api;
-	php artisan config:cache;
-	cd ..;
-	push-api-heroku;
+	cd api/;\
+	php artisan config:cache;\
+	cd ..;\
+	make push-api-heroku;
 deploy-client:
-	cd client;
-	yarn build;
-	git add .;
-	git commit -m "Deploy";
-	git push;
-	cd ..;
-	push-client-firebase;
+	cd client/;\
+	yarn build;\
+	cd ..;\
+	make push-client-firebase;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Secret Santa"/>
+    <HelloWorld msg="Secret Santa!"/>
     <div>
       <p v-if="loading">Loading</p>
       <p v-if="hasMessage">{{ message }}</p>

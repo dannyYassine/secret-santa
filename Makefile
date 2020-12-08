@@ -20,4 +20,4 @@ deploy-client:
 	git commit -m "Deploy";
 	git push;
 	cd ..;
-	firebase deploy;
+	push-client-firebase;

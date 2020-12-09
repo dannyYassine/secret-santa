@@ -29,8 +29,6 @@ jobs:
   - stage: api-deploy
     language: node_js
     node_js: 14.15.1
-    before_script:
-      - chmod +x .travis/push.sh
     script:
       - echo *** DEPLOYING ***
     deploy:

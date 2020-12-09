@@ -14,51 +14,51 @@ jobs:
     language: php
     php: 7.4.12
     before_script:
-      - cd api
+    - cd api
     script:
-      - composer install
+    - composer install
   - stage: test
     language: php
     php: 7.4.12
     before_script:
-      - cd api
-      - cp .env.example .env
-      - php artisan key:generate
+    - cd api
+    - cp .env.example .env
+    - php artisan key:generate
     script:
-      - php artisan test
+    - php artisan test
   - stage: api-deploy
     language: node_js
     node_js: 14.15.1
     script:
-      - echo *** DEPLOYING ***
+    - echo *** DEPLOYING ***
     deploy:
       provider: heroku
       api_key:
-        secure: IhnDcm2QcWZltGsjxJbeKGRa7tiT/RAbmPgTfwxpoVD2EuEUs5qKrJ8cElvaUNz3gEMnfLm+PyfJ+QSt95CVCZ43kkzOqIQ5caoOg0VvFvs3MX1NxIcD4bR0+Hbaq5cL/b4riPI8ne3OA9/7tYcC7NAH4E5VZy0PIoXxvxvelYF8roQ0IgGI9cYLn1N+t6lEKYYMVWwNdIA5ryOFsrAA++mWRJSMGCGWYm0LoTd4Ex965flOP4dGzcUt1zKELn/E3CziCqHkRdObLuuZBZmw6WLt8iYahyYKgnJKN9t2uqBBoQLjYakGKkWoLBqqooeVx5PoRghBU+JVC1cQ9iSBDIJr+V/vZgim1Brd+vGJq1NKU5rY9lQCrKWWFZgKA2m4m75pBLUwFHjafuq2Rin2nXQPoK69DkHlL8EA1w6jorkGFkTP9inx6P4XOg56XfIrtqNPPwEl4JUtOWBmSYVLiZQBCnyZyCUeo0l9Zlpo3omYMVWC558o8FjGl/Iz65ioCnklguENAm2U0+j8yaEJWuQSS8DUmbeNAQ4z0J18dsUeNt+YXeScVk9Mw7/3NSiBNpjcKfGHNx539D6HOAhwJxbC4BLhweCv/CZHN5RjtS70sMfZ47Tqt3zvuSMUgRSntSR5yP5Ms7u7dYICZKK5d12RCzG2ikuX5DPlxzf7RO0=
+        secure: oBLeWWwljiIAejCCsZX/94hihj9M2apPZ23hHisMN7kXSqbS+tmqaJLglCEtmN68t7i/qEyX7BxBTH+vyZkCNBsoa2+c8fIn6/UwKdZH0dvkC0cFnCAtUhmoqD2tkjSfpbOyC07jpQDE0jYInT5oJjmvw9l+HgrEWoPH6vyqzfHo8Z1i06TXYhmB5PVTaFvA2VFDk9A72dIGOiITOvXLUZZj6aeAlLAeTw8KVmLs+QnY+abe/9J479/ioPb1iH/alRoh5KZOLEwXZua9v2gKpX4Rlz9KkdCOnFSLf5Cwhh48CrmiKpIwQ4sZuVvAI31aCtZHBY1nxN0SbwLh68O+bQHknc+5RR8sRFpq2RmaW7B3BDn+17dbd71fIhG80vDwaw81V47WsW2mI/5a3mww7l1xqG+QD5YtgoLftnPZvC103mAHSuGoQL7aOSOeV3tvbq0PetZnJb1kg54DurDp8iF8nFa/uAdt2lJhU7A6PUaL0x+xFBsYbJbXTSC96DH6W/0O1CylEemlXPsiNldoQrYqvfwk9ldO/A12zny3ugtAqN8kgS8Zppbk+LFgdkqBFRXNm9ksPjva+CJldPJZagyV4N6Y9Rmw6aXnujIQ8Z5nfEZAs20wuuaw0VuvmtLoD7DgAaryVTyYq6pTVnPHLylvy+YbbQ36LZ376cxHleM=
       app: dannyyassine-secret-santa
       on: main
   - stage: install-dependencies
     language: node_js
     node_js: 14.15.1
     before_script:
-      - cd client
+    - cd client
     script:
-      - yarn install
+    - yarn install
   - stage: test
     language: node_js
     node_js: 14.15.1
     before_script:
-      - cd client
+    - cd client
     script:
-      - yarn test
+    - yarn test
   - stage: client-deploy
     language: node_js
     node_js: 14.15.1
     before_script:
-      - cd client
+    - cd client
     script: yarn deploy
 stages:
-  - install-dependencies
-  - test
-  - api-deploy
-  - client-deploy
+- install-dependencies
+- test
+- api-deploy
+- client-deploy

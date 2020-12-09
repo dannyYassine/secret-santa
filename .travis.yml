@@ -1,51 +1,39 @@
-cache:
-  directories:
-    - $HOME/.composer/cache
+sudo: false
+cache: npm
 branches:
   only:
     - main
 
 jobs:
   include:
-    - stage: composer-install
-      language: php
-      php: '7.4'
-      before_script:
-        - cd api
-      script: composer install
     - stage: api-test
       language: php
       php: '7.4'
       before_script:
         - cd api
+        - composer install
       script: php artisan test
     - stage: api-deploy
       language: php
       php: '7.4'
       script: make deploy-api
-    - stage: yarn-install
-      language: node.js
-      php: '12.0'
-      before_script:
-        - cd client
-      script: yarn install
     - stage: client-test
       language: node.js
       php: '12.0'
       before_script:
         - cd client
+        - yarn install
       script: yarn test
     - stage: client-deploy
       language: node.js
       php: '12.0'
       before_script:
         - cd client
+        - yarn install
       script: yarn deploy
 
 stages:
-  - composer-install
   - api-test
   - api-deploy
-  - yarn-install
   - client-test
   - client-deploy

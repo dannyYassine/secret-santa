@@ -1,43 +1,56 @@
 dist: xenial
 os: linux
 language: php
-cache: npm
+cache:
+  directories:
+    - client/node_modules
+    - api/vendor
 branches:
   only:
     - main
 
 jobs:
   include:
-    - stage: api-test
+    - stage: composer-install
       language: php
-      php: '7.4'
+      php: '7.4.12'
       before_script:
         - cd api
-      script:
-        - composer install
-        - php artisan test
+      script: composer install
+    - stage: api-test
+      language: php
+      php: '7.4.12'
+      before_script:
+        - cd api
+        - php artisan key:generate
+      script: php artisan test
     - stage: api-deploy
       language: php
-      php: '7.4'
+      php: '7.4.12'
       script: make deploy-api
+    - stage: yarn-install
+      language: node_js
+      node_js: '14.15.1'
+      before_script:
+        - cd client
+      script: yarn install
     - stage: client-test
-      php: '12.0'
+      language: node_js
+      node_js: '14.15.1'
       before_script:
         - cd client
-      script:
-        - yarn install
-        - yarn test
+      script: yarn test
     - stage: client-deploy
-      language: node.js
-      php: '12.0'
+      language: node_js
+      node_js: '14.15.1'
       before_script:
         - cd client
-      script:
-        - yarn install
-        - yarn deploy
+      script: yarn deploy
 
 stages:
+  - composer-install
   - api-test
   - api-deploy
+  - yarn-install
   - client-test
   - client-deploy

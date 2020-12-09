@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Module;
 
 use App\Module\Repositories\FriendRepository;
 use App\Module\Services\DistributeFriendsDTO;

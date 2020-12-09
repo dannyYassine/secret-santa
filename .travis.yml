@@ -22,8 +22,6 @@ jobs:
         - composer install
         - php artisan test
     - stage: api-deploy
-      language: php
-      php: '7.4.12'
       deploy:
         provider: heroku
         api_key:
@@ -46,7 +44,5 @@ jobs:
       script: yarn deploy
 
 stages:
-  - api-test
-  - client-test
   - api-deploy
   - client-deploy

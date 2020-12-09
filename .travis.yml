@@ -3,50 +3,48 @@ os: linux
 language: php
 cache:
   directories:
-    - client/node_modules
-    - api/vendor
+  - client/node_modules
+  - api/vendor
 branches:
   only:
-    - main
-
+  - main
 jobs:
   include:
-    - stage: api-test
-      language: php
-      php: '7.4.12'
-      before_script:
-        - cd api
-        - cp .env.example .env
-        - php artisan key:generate
-      script:
-        - composer install
-        - php artisan test
-    - stage: api-deploy
-      language: node_js
-      node_js: '14.15.1'
-      script:
-        - echo *** DEPLOYING ***
-      deploy:
-        provider: heroku
-        api_key:
-          secure: $ENV_HEROKU_API_KEY
-        app: dannyyassine-secret-santa
-        on: main
-    - stage: client-test
-      language: node_js
-      node_js: '14.15.1'
-      before_script:
-        - cd client
-      script:
-        - yarn install
-        - yarn test
-    - stage: client-deploy
-      language: node_js
-      node_js: '14.15.1'
-      before_script:
-        - cd client
-      script: yarn deploy
-
+  - stage: api-test
+    language: php
+    php: 7.4.12
+    before_script:
+    - cd api
+    - cp .env.example .env
+    - php artisan key:generate
+    script:
+    - composer install
+    - php artisan test
+  - stage: api-deploy
+    language: node_js
+    node_js: 14.15.1
+    script:
+    - echo *** DEPLOYING ***
+    deploy:
+      provider: heroku
+      api_key:
+        secure: "$ENV_HEROKU_API_KEY"
+      app: dannyyassine-secret-santa
+      on: main
+  - stage: client-test
+    language: node_js
+    node_js: 14.15.1
+    before_script:
+    - cd client
+    script:
+    - yarn install
+    - yarn test
+  - stage: client-deploy
+    language: node_js
+    node_js: 14.15.1
+    before_script:
+    - cd client
+    script: yarn deploy
 stages:
-  - api-deploy
-  - client-deploy
+- api-deploy
+- client-deploy

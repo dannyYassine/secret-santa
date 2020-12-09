@@ -58,7 +58,5 @@ jobs:
     - cd client
     script: yarn deploy
 stages:
-- install-dependencies
-- test
 - api-deploy
 - client-deploy

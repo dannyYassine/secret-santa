@@ -55,10 +55,6 @@ jobs:
       - cd client
     script: yarn deploy
 stages:
-#- composer-install
-#- yarn-install
-#- api-test
-#- client-test
 - api-deploy
   if: (branch = main)
 - client-deploy

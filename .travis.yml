@@ -1,0 +1,20 @@
+matrix:
+  include:
+    - language: php
+      before_script:
+        - cd api
+      script:
+        - composer install
+        - php artisan test
+        - cd ..
+        - make deploy-api
+    - language: node.js
+      node_js: "12.0"
+      before_script:
+        - cd client
+      script:
+        - yarn install
+        - yarn test
+        - yarn build
+        - cd ..
+        - make deploy-client

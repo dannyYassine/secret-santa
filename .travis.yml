@@ -24,7 +24,12 @@ jobs:
     - stage: api-deploy
       language: php
       php: '7.4.12'
-      script: make deploy-api
+      deploy:
+        provider: heroku
+        api_key:
+          secure: $ENV_HEROKU_API_KEY
+        app: dannyyassine-secret-santa
+        on: main
     - stage: client-test
       language: node_js
       node_js: '14.15.1'

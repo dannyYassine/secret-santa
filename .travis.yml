@@ -56,6 +56,4 @@ jobs:
     script: yarn deploy
 stages:
   - api-deploy
-    if: (branch = main)
   - client-deploy
-    if: (branch = main)

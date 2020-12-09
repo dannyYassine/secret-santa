@@ -55,7 +55,7 @@ jobs:
       - cd client
     script: yarn deploy
 stages:
-- api-deploy
-  if: (branch = main)
-- client-deploy
-  if: (branch = main)
+  - api-deploy
+    if: (branch = main)
+  - client-deploy
+    if: (branch = main)

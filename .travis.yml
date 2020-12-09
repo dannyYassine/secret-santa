@@ -60,6 +60,6 @@ stages:
 #- api-test
 #- client-test
 - api-deploy
-  if: (branch = main) AND (type = push)
+  if: (branch = main)
 - client-deploy
-  if: (branch = main) AND (type = push)
+  if: (branch = main)

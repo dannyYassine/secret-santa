@@ -11,12 +11,6 @@ branches:
 
 jobs:
   include:
-    - stage: composer-install
-      language: php
-      php: '7.4.12'
-      before_script:
-        - cd api
-      script: composer install
     - stage: api-test
       language: php
       php: '7.4.12'
@@ -24,23 +18,21 @@ jobs:
         - cd api
         - cp .env.example .env
         - php artisan key:generate
-      script: php artisan test
+      script:
+        - composer install
+        - php artisan test
     - stage: api-deploy
       language: php
       php: '7.4.12'
       script: make deploy-api
-    - stage: yarn-install
-      language: node_js
-      node_js: '14.15.1'
-      before_script:
-        - cd client
-      script: yarn install
     - stage: client-test
       language: node_js
       node_js: '14.15.1'
       before_script:
         - cd client
-      script: yarn test
+      script:
+        - yarn install
+        - yarn test
     - stage: client-deploy
       language: node_js
       node_js: '14.15.1'
@@ -49,9 +41,7 @@ jobs:
       script: yarn deploy
 
 stages:
-  - composer-install
   - api-test
-  - api-deploy
-  - yarn-install
   - client-test
+  - api-deploy
   - client-deploy

@@ -6,6 +6,7 @@
             "email": "dannyyassine@gmail.com"
         }
     ],
+    "version": "1.0.0",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [

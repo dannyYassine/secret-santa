@@ -17,18 +17,15 @@ class DistributeFriendsService
     public NexmoUtil $nexmoUtil;
     public FriendRepository $friendRepository;
 
-    public function __construct()
+    public function __construct(FriendRepository $friendRepository, MailUtil $mailUtil, NexmoUtil $nexmoUtil)
     {
-        $this->mailUtil = new MailUtil();
-        $this->nexmoUtil = new NexmoUtil();
-        $this->friendRepository = new FriendRepository();
+        $this->friendRepository = $friendRepository;
+        $this->mailUtil = $mailUtil;
+        $this->nexmoUtil = $nexmoUtil;
     }
 
     public function execute(DistributeFriendsDTO $dto): bool
     {
-
-        return 'ready';
-
         try {
             /* @var Friend[] $friends */
             $friends = $this->friendRepository->all();

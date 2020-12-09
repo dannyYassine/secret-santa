@@ -12,7 +12,7 @@ class DistributeFriendsDTO extends BaseDTO
     /**
      * @var Friend[]
      */
-    private array $friends;
+    public array $friends;
 
     protected function extendRequestProps(Request $request): void
     {

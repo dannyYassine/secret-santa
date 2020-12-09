@@ -2,8 +2,7 @@
   "scripts": {
     "post-autoload-dump": [
       "cd api ; composer install",
-      "rm -rf vendor",
-      "rm composer.lock"
+      "rm -rf vendor"
     ]
   }
 }

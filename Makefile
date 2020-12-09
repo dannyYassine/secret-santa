@@ -18,3 +18,6 @@ deploy-client:
 	yarn build;\
 	cd ..;\
 	make push-client-firebase;
+deploy-both:
+	make deploy-api
+	make deploy-client

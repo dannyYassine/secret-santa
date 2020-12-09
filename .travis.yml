@@ -1,4 +1,6 @@
-cache: composer
+cache:
+  directories:
+    - $HOME/.composer/cache
 branches:
   only:
     - main

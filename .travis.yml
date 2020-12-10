@@ -34,7 +34,7 @@ jobs:
     deploy:
       provider: heroku
       api_key:
-        secure: oBLeWWwljiIAejCCsZX/94hihj9M2apPZ23hHisMN7kXSqbS+tmqaJLglCEtmN68t7i/qEyX7BxBTH+vyZkCNBsoa2+c8fIn6/UwKdZH0dvkC0cFnCAtUhmoqD2tkjSfpbOyC07jpQDE0jYInT5oJjmvw9l+HgrEWoPH6vyqzfHo8Z1i06TXYhmB5PVTaFvA2VFDk9A72dIGOiITOvXLUZZj6aeAlLAeTw8KVmLs+QnY+abe/9J479/ioPb1iH/alRoh5KZOLEwXZua9v2gKpX4Rlz9KkdCOnFSLf5Cwhh48CrmiKpIwQ4sZuVvAI31aCtZHBY1nxN0SbwLh68O+bQHknc+5RR8sRFpq2RmaW7B3BDn+17dbd71fIhG80vDwaw81V47WsW2mI/5a3mww7l1xqG+QD5YtgoLftnPZvC103mAHSuGoQL7aOSOeV3tvbq0PetZnJb1kg54DurDp8iF8nFa/uAdt2lJhU7A6PUaL0x+xFBsYbJbXTSC96DH6W/0O1CylEemlXPsiNldoQrYqvfwk9ldO/A12zny3ugtAqN8kgS8Zppbk+LFgdkqBFRXNm9ksPjva+CJldPJZagyV4N6Y9Rmw6aXnujIQ8Z5nfEZAs20wuuaw0VuvmtLoD7DgAaryVTyYq6pTVnPHLylvy+YbbQ36LZ376cxHleM=
+        secure: ggYIBiV5LcAVE1q9DFrK9gspvPz3ihU9iOENQbZ2dQuKuG3lQsNN6pW4u5Lv8afaFqwERqSNR5NbrOhZ76Sv7281pCekAZhPGEU8Qdd+coM0wqOvE+vagrQW7Eih4VB9rpO17K8oUCAixh6ys0KeX9nSiL2aPXZIFFqpOPy+GYkd0N6LvzaUrrKthmzioBhRq4rgeNX/nVi3JFGyV6fMWFe62qwZTYX38QWY6qkBIaXbVSR+I49cCgU38FDy9JlkrhUwo68p/JmJSVyaJdMThgjnENo+22ot1qMupDL3qZ0H//j+9o7bdKhO2qATQd/M/XnlIuoTjp6MyRU+TRxX9wTc6uq0NF8TcX1owns83pZ9YIhHWe9qdRF+yHG5UsR+5lVhm9+tMtwCCMl4JTsZllKJul6O97Dk20jau4hBcetLQhgQuoNft8APDAss1wuo8X+10mGAfS63SzcS+jgm5SKUtelbBgo+6K1oeyGvz2hCfFulibs2c8PXlEDj7sjhF16DdDoYj0R3WmxwRjjpz/c3IIHZRfk6rB4Lqvp25V+UrWhGB9zhQTAC7FHbZNV6/VrZ7rcKtyCxt03seS2NnH5f917C8OQsISfUEaUP8mb9r6qx0ZZtEsDl0yN7cAYPzdBzKWJK/Oal2aH1UE7JWqVLtPJapNyXaaHhEcI/izU=
       app: dannyyassine-secret-santa
       on: main
   - stage: install-dependencies
@@ -54,9 +54,12 @@ jobs:
   - stage: client-deploy
     language: node_js
     node_js: 14.15.1
-    before_script:
-    - cd client
-    script: yarn deploy
+    script: skip
+    deploy:
+      provider: firebase
+      token:
+        secure: ePXdrECuUbcc8qPDwgVA9GC0ovxbACKTRxvbKPwzuNP5i0K5DedIquhEaLEWHFzAUYy+NCkiqOa7aMAZ9Fx6KyGRp7boahCyMHe2Bw+CWBZP1AGHCyUIaCcnOA71S9xXWqrWcpC0eO/XzdnEFt3ZJGFoX1ct2Y1AHskhXAAjIx+jyX+ldm9ouEzSRd4YNDHeHj8fmLOuIp68JH4kZx/6hHdVbxlKoiBCFxF/wswWu7tAu0qMTwyHKvT1RX+iBk8ayoZAaK5YGvJSl1i7+CFGxTTp5dxey8pQzWBCLYXB8BDcnZ3VMUxPINubzhr8vnjE+Tm+FHB8TIVVk9h+daKm2I6Y4Vr1vtkC/yqLkcBY0JhKdH28D52m4RBTLwTg4iJ/j2F8drZns/S+WM41x/nF6058hMLIJRf9x2qm3rAAPPxN5Wl6IJB3H+uUsVISrfHeBTTdbLbx8Zn+DMPLVwKHYXw+I3DBvQG6mojax6A/x+7RajsskV0BaP3LlbU0f5t6fpdUsinGjvxAvMAf9MCielCvmOGv7tQkP/gtv0hdH22Bxi0M7nRGU6cUGBysoxlPxYcMj4hhwjfru3XjT/q3EGLaAyq/lz6JMLxH3xjVvHuYA+XLrpAlHG0zFx+dWkRWAyVArYvUCDiHKZ0JecmXq1JeK/aILcsrY5/dM1MmCl4=
+      project: virtual-secret-santa
 stages:
 - install-dependencies
 - test

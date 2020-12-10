@@ -4,7 +4,7 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "cd api ; composer install",
+      "cd api ; composer install --prefer-dist --no-scripts --no-progress --no-interaction --no-dev",
       "rm -rf vendor"
     ]
   }

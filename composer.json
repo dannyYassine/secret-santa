@@ -5,7 +5,7 @@
   },
   "scripts": {
     "compile": [
-      "cd api ; composer install --prefer-dist --no-scripts --no-progress --no-interaction --no-dev",
+      ". .travis/install.sh",
       "rm -rf vendor"
     ]
   }

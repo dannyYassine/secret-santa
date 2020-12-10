@@ -1,7 +1,7 @@
 {
   "description": "THIS IS ONLY WHERE BECAUSE OF HEROKU PHP DETECTION",
   "require": {
-    "php": "^7.4|^8.0"
+    "php": "^7.4"
   },
   "scripts": {
     "compile": [

@@ -1,5 +1,8 @@
 {
   "description": "THIS IS ONLY WHERE BECAUSE OF HEROKU PHP DETECTION",
+  "require": {
+    "php": "^7.4|^8.0"
+  },
   "scripts": {
     "compile": [
       "cd api ; composer install --prefer-dist --no-scripts --no-progress --no-interaction --no-dev",

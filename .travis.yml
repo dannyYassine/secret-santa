@@ -59,6 +59,7 @@ jobs:
       - cd client
     script:
       - yarn build
+      - ls -ls
       - cd ..
     deploy:
       provider: firebase

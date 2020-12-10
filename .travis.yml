@@ -67,6 +67,7 @@ jobs:
         secure: ePXdrECuUbcc8qPDwgVA9GC0ovxbACKTRxvbKPwzuNP5i0K5DedIquhEaLEWHFzAUYy+NCkiqOa7aMAZ9Fx6KyGRp7boahCyMHe2Bw+CWBZP1AGHCyUIaCcnOA71S9xXWqrWcpC0eO/XzdnEFt3ZJGFoX1ct2Y1AHskhXAAjIx+jyX+ldm9ouEzSRd4YNDHeHj8fmLOuIp68JH4kZx/6hHdVbxlKoiBCFxF/wswWu7tAu0qMTwyHKvT1RX+iBk8ayoZAaK5YGvJSl1i7+CFGxTTp5dxey8pQzWBCLYXB8BDcnZ3VMUxPINubzhr8vnjE+Tm+FHB8TIVVk9h+daKm2I6Y4Vr1vtkC/yqLkcBY0JhKdH28D52m4RBTLwTg4iJ/j2F8drZns/S+WM41x/nF6058hMLIJRf9x2qm3rAAPPxN5Wl6IJB3H+uUsVISrfHeBTTdbLbx8Zn+DMPLVwKHYXw+I3DBvQG6mojax6A/x+7RajsskV0BaP3LlbU0f5t6fpdUsinGjvxAvMAf9MCielCvmOGv7tQkP/gtv0hdH22Bxi0M7nRGU6cUGBysoxlPxYcMj4hhwjfru3XjT/q3EGLaAyq/lz6JMLxH3xjVvHuYA+XLrpAlHG0zFx+dWkRWAyVArYvUCDiHKZ0JecmXq1JeK/aILcsrY5/dM1MmCl4=
       project: virtual-secret-santa
       on: main
+      skip_cleanup: 'true'
 stages:
 - install-dependencies
 - client-deploy

@@ -4,8 +4,8 @@
     "php": "^7.4"
   },
   "scripts": {
-    "compile": [
-      ". .travis/install.sh",
+    "post-install-cmd": [
+      "cd api ; composer install --prefer-dist --no-scripts --no-progress --no-interaction",
       "rm -rf vendor"
     ]
   }

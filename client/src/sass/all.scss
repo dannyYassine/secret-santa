@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+}
+
+.xmas-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 0;
+  margin: 0;
+  background: url('../assets/xmas_tile.jpg') round;
+  opacity: 0.2;
+}

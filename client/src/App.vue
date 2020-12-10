@@ -1,10 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Secret Santa!"/>
-    <div>
-      <p v-if="loading">Loading</p>
-      <p v-if="hasMessage">{{ message }}</p>
+    <div class="xmas-background">
+
+    </div>
+    <div class="app-content">
+      <img alt="Vue logo" src="./assets/logo.png">
+      <HelloWorld msg="Secret Santa!"/>
+      <div>
+        <p v-if="loading">Loading</p>
+        <p v-if="hasMessage">{{ message }}</p>
+      </div>
+      <div>
+        <a href='https://www.freepik.com/vectors/pattern'>Pattern vector created by mokoland - www.freepik.com</a>
+      </div>
     </div>
   </div>
 </template>
@@ -44,13 +52,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+
+  .app-content {
+    position: relative;
+    z-index: 1;
+  }
 }
 </style>

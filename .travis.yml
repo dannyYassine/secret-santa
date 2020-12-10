@@ -55,7 +55,9 @@ jobs:
   - stage: client-deploy
     language: node_js
     node_js: 14.15.1
-    script: skip
+    before_script:
+      - cd client
+    script: yarn build
     deploy:
       provider: firebase
       token:

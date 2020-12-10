@@ -1,4 +1,5 @@
 {
+  "name": "THIS IS ONLY WHERE BECAUSE OF HEROKU PHP DETECTION",
   "scripts": {
     "compile": [
       "cd api ; composer install --prefer-dist --no-scripts --no-progress --no-interaction --no-dev",

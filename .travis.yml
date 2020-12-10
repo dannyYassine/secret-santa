@@ -65,4 +65,5 @@ jobs:
       project: virtual-secret-santa
       on: main
 stages:
+- install-dependencies
 - client-deploy

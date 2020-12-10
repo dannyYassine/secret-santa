@@ -34,9 +34,10 @@ jobs:
     deploy:
       provider: heroku
       api_key:
-        secure: USB0zxfS+uBM/7TRBW9yGk94BIctSP7dAgx4n9AK+MOdxTOBtRVLVW7AcMzAeRxYhDuq3rpe0ZAE4rzCdoQCG5rSdIezPdQoCsZWD1eO0AqY732tn0KyGkmU/dHtM18qNz68y4uv2GVtwirB13qrBzDjOPvZIN056VOHHygx/Rhk2jEHvJM5FiswhFCwLTJvpjqCDqkUQ5pdI/k/YwnyaCsRyi+hNO2nZfJZzr3WxAMJrcYbQ+f8J3yHidiAZGTkOWINpy1T7WiT8h6ayIU9jm/7zJ7WzIVJpoe92YL+JgS8jIDmrOwYeblr4glu9A6PqCOWSwl+7udJblkyrbYTNkX3d6MZUYgdcM9lY+/lYVzRh3M+GACAoPuWflJ7OEdZYkRq2dxTT69SR1FJTVVpjQlgutz8Yea5bf+z17/BnixYM+AUmPUIkGkeGhbqzIJVgd1rfrOZsLTz97XhkAUABkb6Vl/OUOijiULNKs8+zPjBKP9TfGLvz369mwZHRq1QOijS/QotARGiHCUwR17Xl66v32nRhZGaJHWtV/iYmnlqMsSGEmoQ+i81trFdO00IrZbIDyCTnj633hTbG9JeXCJV4K78gb0hzpktt6CX6jlH2iWZEELyg+3GY5BwjNXZBFBW1TpiIM/zG+FQSq9dlBBvWPkDnEvKxLO+bxAs8Xg=
+        secure: lOZpbfgk/FOpeFEForZcDg+IBXucNpbtsz3X0Zu+US6r6RvcR+sjcaOEvcIs67lCvkrmMV7ANNPzAxwTpADOXFIKkyOIMJOJrUsrvbokQutcQCsTYyo+oKFLQGV3ZE++mzvWoYzD1G92jslvePGv404zCDFejdQjI+NIXqq+6sFQXh03Cbum37mQufJJDHn8pKDGlN9eAx4zHSQFc+3z96w93Mi0ZYukUCMsa/8HALvAP2m2XcXQsWfvkESIXIkWuXV/kdscbjG4sHPum/5IsHS4p65Z9ybo0NoLr+waOdvabG1/z23zVtDVuRnbhiZzgebNs1lJ/iYCOub5WZvZsIhw5f/szCs1KLgMP+Da9Kcvrr1D+vLLAnikptv3yC+UyOCjnzdSjyI52qXOHPzqZiZZPQDQa05eM+cgKzVIsqvuOk3TRgeoMiAJN21MKlZRQZHhYldVLw7lJmwtGXMPvTe0Iv/FkuXZGB9PHdh8wWC/4/KTCIh6MA/Hsgr2w3asQPfRgxu06WH2+kIBnyqoYhaQVZesCrgKvtwbIFjuekO81woBic/q6qnW4MJT4FOBWqcbjhbtGY6IZBDxJJmmKZw/y6ppCYikSfI1+/kBMLA2V1AJQzfg78X0mh1KYPj3r2xdYcvzzq2YNi98/iZOCXu+n/CY7BlL3ftP+rEDkf8=
       app: dannyyassine-secret-santa
       on: main
+      skip_cleanup: 'true'
   - stage: install-dependencies
     language: node_js
     node_js: 14.15.1

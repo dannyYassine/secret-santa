@@ -10,4 +10,8 @@ heroku buildpacks:add heroku/php
 heroku config:set PROJECT_PATH=api
 ```
 
+Procfile and nginx_app.conf loccated in the api/ folder,
+because heroku needs these files at the project root and so we had to use the buildpack above.
+
+
 ### Travis CI setup

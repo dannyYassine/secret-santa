@@ -1,5 +1,7 @@
 # secret-santa
 
+[![Build Status](https://travis-ci.com/dannyYassine/secret-santa.svg?branch=main)](https://travis-ci.com/github/dannyYassine/secret-santa)
+
 ### API set up on heroku
 
 ```

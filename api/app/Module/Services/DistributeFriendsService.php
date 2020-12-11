@@ -24,16 +24,16 @@ class DistributeFriendsService
         $this->nexmoUtil = $nexmoUtil;
     }
 
-    public function execute(DistributeFriendsDTO $dto): bool
+    public function execute(DistributeFriendsDTO $dto): string
     {
         try {
             /* @var Friend[] $friends */
-            $friends = $this->friendRepository->all();
+            $friends = $dto->friends; //$this->friendRepository->all();
             $this->friends_count = count($friends);
 
             $friends_recipients = $this->createRecipients($friends);
 
-            $this->send($friends_recipients);
+            return $this->send($friends_recipients);
         } catch (\Throwable $e) {
             return false;
         }
@@ -59,14 +59,17 @@ class DistributeFriendsService
         return $friends_recipients;
     }
 
-    private function send(array $friends_recipients): void
+    /**
+     * @throws \Throwable
+     */
+    private function send(array $friends_recipients): string
     {
         foreach ($friends_recipients as $friends_recipient) {
             $friend = $friends_recipient[0];
             $recipient = $friends_recipient[1];
 
             if ($friend->email) {
-                $this->mailUtil->sendInvite($friend->email, $recipient);
+                return $this->mailUtil->sendInvite($friend->name, $friend->email, $recipient);
             } else if ($friend->phone) {
                 $this->nexmoUtil->sendInvite($friend->phone, $recipient);
             }

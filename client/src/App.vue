@@ -4,12 +4,12 @@
 
     </div>
     <div class="app-content">
-      <img alt="Vue logo" src="./assets/logo.png">
-      <HelloWorld msg="Secret Santa!"/>
+      <HelloWorld msg="Welcome to Secret Santa!"/>
       <div>
-        <p v-if="loading">Loading</p>
-        <p v-if="hasMessage">{{ message }}</p>
+        <FriendForm v-for="friend in friends" :friend="friend"/>
       </div>
+      <b-button type="is-primary is-light" @click="addFriendClicked">Add Friend</b-button>
+      <b-button type="is-success is-light" @click="onSendClicked">Send</b-button>
       <div>
         <a href='https://www.freepik.com/vectors/pattern'>Pattern vector created by mokoland - www.freepik.com</a>
       </div>
@@ -20,16 +20,20 @@
 <script>
 import HelloWorld from '/@/components/HelloWorld.vue'
 import { apiAxios } from '/@/helpers/AxiosHelper';
+import {Friend} from "@/models/Friend";
+import FriendForm from "@/components/FriendForm";
 
 export default {
   name: 'App',
   components: {
+    FriendForm,
     HelloWorld
   },
   data() {
     return {
       loading: true,
-      message: null
+      message: null,
+      friends: []
     }
   },
   computed: {
@@ -42,8 +46,18 @@ export default {
       this.loading = true;
       const data = await apiAxios.get('/stay-alive');
       this.message = data.data.data;
-      console.log(this.message);
       this.loading = false;
+    },
+    addFriendClicked() {
+      this.friends.push(new Friend());
+    },
+    async onSendClicked() {
+      try {
+        this.loading = true;
+        await apiAxios.post('/distribute', {friends: this.friends});
+      } finally {
+        this.loading = false;
+      }
     }
   },
   mounted() {

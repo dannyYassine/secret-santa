@@ -22,7 +22,7 @@ class FriendMapper
         $friend->name = $json->name;
         $friend->email = $json->email;
 
-        if (isset($json->address)) {
+        if (isset($json->address) && !is_null($json->address)) {
             $friend->address = AddressMapper::toAddress($json->address);
         }
 

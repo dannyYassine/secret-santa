@@ -16,7 +16,7 @@ class DistributeFriendsDTO extends BaseDTO
 
     protected function extendRequestProps(Request $request): void
     {
-        $this->friends = FriendMapper::toFriends($request['friends']);
+        $this->friends = FriendMapper::toFriends(json_decode(json_encode($request['friends'])));
     }
 
 }

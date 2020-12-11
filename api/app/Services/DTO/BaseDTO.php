@@ -39,6 +39,11 @@ abstract class BaseDTO
         // to be implemented by child if needed
     }
 
+    protected function extendArrayProps(array $array): void
+    {
+        // to be implemented by child if needed
+    }
+
     private function getValidator(): Validator
     {
         return ValidatorFacade::make($this->toArray(), $this->rules(), $this->messages());
@@ -53,6 +58,7 @@ abstract class BaseDTO
         } else if (is_array($args[0])) {
             $array = $args[0];
             $this->mapToProperties($array);
+            $this->extendArrayProps($array);
         }
     }
 

@@ -10,7 +10,7 @@ class MailUtil
     public function sendInvite(Friend $sender, Friend $recipient): void
     {
         try {
-            Mail::send(['html'=>'mail'], ['sender' => $sender, 'recipient' => $recipient], function ($message) use ($sender) {
+            Mail::send(['html' => 'invite'], ['sender' => $sender, 'recipient' => $recipient], function ($message) use ($sender) {
                 $message->to($sender->email, $sender->name)->subject
                 ('Secret Santa');
                 $message->from('dannyyassine@gmail.com','Danny Yassine');

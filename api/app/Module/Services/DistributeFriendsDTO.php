@@ -19,4 +19,9 @@ class DistributeFriendsDTO extends BaseDTO
         $this->friends = FriendMapper::toFriends(json_decode(json_encode($request['friends'])));
     }
 
+    protected function extendArrayProps(array $array): void
+    {
+        $this->friends = FriendMapper::toFriends(json_decode(json_encode($array['friends'])));
+    }
+
 }

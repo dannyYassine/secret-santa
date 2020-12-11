@@ -24,6 +24,10 @@ class DistributeFriendsService
 
     public function execute(DistributeFriendsDTO $dto): bool
     {
+        if (!count($dto->friends)) {
+            return false;
+        }
+        
         try {
             /* @var Friend[] $friends */
             $friends = $dto->friends;

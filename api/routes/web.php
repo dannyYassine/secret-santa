@@ -1,5 +1,6 @@
 <?php
 
+use App\Module\Models\Friend;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ Route::get('/', function () {
     return 'Working!';
 });
 
-Route::get('/hello', function () {
-    return 'hello!';
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+Route::get('/mail/invite', function () {
+    return view('invite', ['sender' => new Friend(), 'recipient' => new Friend()]);
 });

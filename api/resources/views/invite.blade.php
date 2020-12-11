@@ -187,7 +187,7 @@
 
         table{
         }
-        /*LOGO*/
+        /* LOGO */
 
         .logo h1{
             margin: 0;
@@ -328,6 +328,21 @@
         <!-- BEGIN BODY -->
         <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
             <tr>
+                <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="text" style="padding: 0 2.5em; text-align: center;">
+                                    <h1>❄️ ❄️ ❄️️ ❄️ ❄️ ❄️️ ❄️</h1>
+                                    <h1>Virtual Secret Santa </h1>
+                                    <h1>❄️ ❄️ ❄️️ ❄️ ❄️ ❄️️ ❄️</h1>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
                 <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
@@ -363,46 +378,12 @@
         </table>
         <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
             <tr>
-                <td valign="middle" class="bg_light footer email-section">
+                <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
                     <table>
                         <tr>
-                            <td valign="top" width="33.333%" style="padding-top: 20px;">
-{{--                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">--}}
-{{--                                    <tr>--}}
-{{--                                        <td style="text-align: left; padding-right: 10px;">--}}
-{{--                                            <h3 class="heading">About</h3>--}}
-{{--                                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                </table>--}}
-                            </td>
-                            <td valign="top" width="33.333%" style="padding-top: 20px;">
-                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                    <tr>
-                                        <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
-                                            <h2 class="heading">Address</h2>
-                                            <ul>
-                                                <li><span class="text">{{ $recipient->address->getPrettyAddress() }}</span></li>
-{{--                                                <li><span class="text">+2 392 3929 210</span></a></li>--}}
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td valign="top" width="33.333%" style="padding-top: 20px;">
-{{--                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">--}}
-{{--                                    <tr>--}}
-{{--                                        <td style="text-align: left; padding-left: 10px;">--}}
-{{--                                            <h3 class="heading">Useful Links</h3>--}}
-{{--                                            <ul>--}}
-{{--                                                <li><a href="#">Home</a></li>--}}
-{{--                                                <li><a href="#">About</a></li>--}}
-{{--                                                <li><a href="#">Services</a></li>--}}
-{{--                                                <li><a href="#">Work</a></li>--}}
-{{--                                            </ul>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                </table>--}}
+                            <td style="text-align: center; padding-left: 5px; padding-right: 5px;">
+                                <h2 class="heading">Address</h2>
+                                <span class="text">{{ $recipient->address->getPrettyAddress() }}</span>
                             </td>
                         </tr>
                     </table>

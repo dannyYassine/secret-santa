@@ -5,12 +5,14 @@ cache:
   directories:
   - client/node_modules
   - api/vendor
+  - client/dist
 branches:
   only:
   - main
 jobs:
   include:
   - stage: install-dependencies
+    name: Installing composer vendors
     language: php
     php: 7.4.12
     before_script:
@@ -18,6 +20,7 @@ jobs:
     script:
     - composer install
   - stage: test
+    name: Run api tests
     language: php
     php: 7.4.12
     before_script:
@@ -27,6 +30,7 @@ jobs:
     script:
     - php artisan test
   - stage: api-deploy
+    name: Deploy api to heroku
     language: node_js
     node_js: 14.15.1
     script:
@@ -39,6 +43,7 @@ jobs:
       on: main
       skip_cleanup: 'true'
   - stage: install-dependencies
+    name: Installing node_modules
     language: node_js
     node_js: 14.15.1
     before_script:
@@ -46,13 +51,23 @@ jobs:
     script:
     - yarn install
   - stage: test
+    name: Run client tests
     language: node_js
     node_js: 14.15.1
     before_script:
     - cd client
     script:
     - yarn test
+  - stage: test
+    name: Test client build
+    language: node_js
+    node_js: 14.15.1
+    before_script:
+      - cd client
+    script:
+      - yarn build
   - stage: client-deploy
+    name: Deploy client to Firebase
     language: node_js
     node_js: 14.15.1
     before_script:

@@ -5,7 +5,6 @@ namespace App\Module\Services;
 use App\Module\Models\Friend;
 use App\Module\Repositories\FriendRepository;
 use App\Module\Utils\Mail\MailUtil;
-use App\Module\Utils\Nexmo\NexmoUtil;
 
 class DistributeFriendsService
 {
@@ -17,18 +16,17 @@ class DistributeFriendsService
     public NexmoUtil $nexmoUtil;
     public FriendRepository $friendRepository;
 
-    public function __construct(FriendRepository $friendRepository, MailUtil $mailUtil, NexmoUtil $nexmoUtil)
+    public function __construct(FriendRepository $friendRepository, MailUtil $mailUtil)
     {
         $this->friendRepository = $friendRepository;
         $this->mailUtil = $mailUtil;
-        $this->nexmoUtil = $nexmoUtil;
     }
 
     public function execute(DistributeFriendsDTO $dto): bool
     {
         try {
             /* @var Friend[] $friends */
-            $friends = $dto->friends; //$this->friendRepository->all();
+            $friends = $dto->friends;
             $this->friends_count = count($friends);
 
             $friends_recipients = $this->createRecipients($friends);
@@ -68,11 +66,7 @@ class DistributeFriendsService
             $friend = $friends_recipient[0];
             $recipient = $friends_recipient[1];
 
-            if ($friend->email) {
-                $this->mailUtil->sendInvite($friend->name, $friend->email, $recipient);
-            } else if ($friend->phone) {
-                $this->nexmoUtil->sendInvite($friend->phone, $recipient);
-            }
+            $this->mailUtil->sendInvite($friend, $recipient);
         }
     }
 

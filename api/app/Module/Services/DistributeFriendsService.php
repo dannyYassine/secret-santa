@@ -13,7 +13,6 @@ class DistributeFriendsService
     private array $friends = [];
 
     public MailUtil $mailUtil;
-    public NexmoUtil $nexmoUtil;
     public FriendRepository $friendRepository;
 
     public function __construct(FriendRepository $friendRepository, MailUtil $mailUtil)
@@ -27,13 +26,11 @@ class DistributeFriendsService
         if (!count($dto->friends)) {
             return false;
         }
-        
-        try {
-            /* @var Friend[] $friends */
-            $friends = $dto->friends;
-            $this->friends_count = count($friends);
 
-            $friends_recipients = $this->createRecipients($friends);
+        try {
+            $this->friends_count = count($dto->friends);
+
+            $friends_recipients = $this->createRecipients($dto->friends);
 
             $this->send($friends_recipients);
         } catch (\Throwable $e) {

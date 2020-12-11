@@ -8,6 +8,7 @@
     <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="{!! asset('mail/app.css') !!}" rel="stylesheet" type="text/css" >
 
     <!-- CSS Reset : BEGIN -->
     <style>
@@ -20,7 +21,6 @@
             padding: 0 !important;
             height: 100% !important;
             width: 100% !important;
-            background: #f1f1f1;
         }
 
         /* What it does: Stops email clients resizing small text. */
@@ -332,7 +332,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td class="logo" style="text-align: center;">
-                                <h1><a href="#">e-Verify</a></h1>
+                                <h1><a href="#">Hi {{ $sender->name }}</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -349,9 +349,10 @@
                         <tr>
                             <td>
                                 <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                    <h2>Please verify your email</h2>
-                                    <h3>Amazing deals, updates, interesting news right in your inbox</h3>
-                                    <p><a href="#" class="btn btn-primary">Yes! Subscribe Me</a></p>
+                                    <h2>Your secret santa is:</h2>
+                                    <h1>{{ $recipient->name }}</h1>
+                                    <p>
+                                    </p>
                                 </div>
                             </td>
                         </tr>
@@ -366,42 +367,42 @@
                     <table>
                         <tr>
                             <td valign="top" width="33.333%" style="padding-top: 20px;">
-                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                    <tr>
-                                        <td style="text-align: left; padding-right: 10px;">
-                                            <h3 class="heading">About</h3>
-                                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                        </td>
-                                    </tr>
-                                </table>
+{{--                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">--}}
+{{--                                    <tr>--}}
+{{--                                        <td style="text-align: left; padding-right: 10px;">--}}
+{{--                                            <h3 class="heading">About</h3>--}}
+{{--                                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                </table>--}}
                             </td>
                             <td valign="top" width="33.333%" style="padding-top: 20px;">
                                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                     <tr>
                                         <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
-                                            <h3 class="heading">Contact Info</h3>
+                                            <h2 class="heading">Address</h2>
                                             <ul>
-                                                <li><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                                <li><span class="text">+2 392 3929 210</span></a></li>
+                                                <li><span class="text">{{ $recipient->address->getPrettyAddress() }}</span></li>
+{{--                                                <li><span class="text">+2 392 3929 210</span></a></li>--}}
                                             </ul>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                             <td valign="top" width="33.333%" style="padding-top: 20px;">
-                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                    <tr>
-                                        <td style="text-align: left; padding-left: 10px;">
-                                            <h3 class="heading">Useful Links</h3>
-                                            <ul>
-                                                <li><a href="#">Home</a></li>
-                                                <li><a href="#">About</a></li>
-                                                <li><a href="#">Services</a></li>
-                                                <li><a href="#">Work</a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </table>
+{{--                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">--}}
+{{--                                    <tr>--}}
+{{--                                        <td style="text-align: left; padding-left: 10px;">--}}
+{{--                                            <h3 class="heading">Useful Links</h3>--}}
+{{--                                            <ul>--}}
+{{--                                                <li><a href="#">Home</a></li>--}}
+{{--                                                <li><a href="#">About</a></li>--}}
+{{--                                                <li><a href="#">Services</a></li>--}}
+{{--                                                <li><a href="#">Work</a></li>--}}
+{{--                                            </ul>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                </table>--}}
                             </td>
                         </tr>
                     </table>
@@ -409,7 +410,7 @@
             </tr><!-- end: tr -->
             <tr>
                 <td class="bg_light" style="text-align: center;">
-                    <p>No longer want to receive these email? You can <a href="#" style="color: rgba(0,0,0,.8);">Unsubscribe here</a></p>
+                    <p>❄️ ❄️ ❄️️ Thank you for using Virtual Secret Santa! ❄️ ❄️ ❄️️</p>
                 </td>
             </tr>
         </table>

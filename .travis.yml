@@ -70,4 +70,6 @@ jobs:
       skip_cleanup: 'true'
 stages:
 - install-dependencies
+- test
+- api-deploy
 - client-deploy

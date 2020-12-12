@@ -6,10 +6,10 @@
     <div class="app-content">
       <HelloWorld msg="Welcome to Secret Santa!"/>
       <div>
-        <FriendForm v-for="friend in friends" :key="friend.email" :friend="friend"/>
+        <FriendForm v-for="friend in friends" :key="friend.id" :friend="friend"/>
       </div>
-      <b-button type="is-primary is-light" @click="addFriendClicked">Add Friend</b-button>
-      <b-button type="is-success is-light" @click="onSendClicked">Send</b-button>
+      <b-button data-e2e="add-friend" type="is-primary is-light" @click="addFriendClicked">Add Friend</b-button>
+      <b-button data-e2e="send-invites" type="is-success is-light" @click="onSendClicked">Send</b-button>
       <div>
         <a href='https://www.freepik.com/vectors/pattern'>Pattern vector created by mokoland - www.freepik.com</a>
       </div>

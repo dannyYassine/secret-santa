@@ -1,13 +1,12 @@
 <template>
   <div>
     <b-field label="Name">
-      <b-input v-model="friend.name"></b-input>
+      <b-input v-model="friend.name" data-e2e="friend-input-name"></b-input>
     </b-field>
-    <b-field label="Email"
-             type="is-danger"
-             message="This email is invalid">
+    <b-field label="Email">
       <b-input type="email"
-               v-model="friend.email">
+               v-model="friend.email"
+               data-e2e="friend-input-email">
       </b-input>
     </b-field>
   </div>

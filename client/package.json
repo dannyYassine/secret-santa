@@ -6,15 +6,20 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "echo test",
+    "test": "start-server-and-test serve http://localhost:3000 test:cypress:run",
+    "test:cypress:open": "./node_modules/.bin/cypress open",
+    "test:cypress:run": "./node_modules/.bin/cypress run",
     "deploy": "firebase deploy"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "buefy": "^0.9.4",
     "core-js": "^3.6.5",
+    "cypress": "^6.1.0",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
+    "start-server-and-test": "^1.11.6",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
     "webpackbar": "^5.0.0-3"
   },

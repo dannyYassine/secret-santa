@@ -63,12 +63,7 @@ class DistributeFriendsService
      */
     private function send(array $friends_recipients): void
     {
-        foreach ($friends_recipients as $friends_recipient) {
-            $friend = $friends_recipient[0];
-            $recipient = $friends_recipient[1];
-
-            $this->mailUtil->sendInvite($friend, $recipient);
-        }
+        $this->mailUtil->sendInvites($friends_recipients);
     }
 
     private function findNewFriend(Friend $friend, array $friends): int

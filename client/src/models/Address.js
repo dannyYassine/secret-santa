@@ -1,5 +1,6 @@
+import { BaseModel } from '@/models/BaseModel';
 
-export class Address {
+export class Address extends BaseModel {
   /**
    * @type string
    */
@@ -21,6 +22,7 @@ export class Address {
   postalCode;
   
   constructor(props = {}) {
+    super(props);
     this.streetNumber = props.streetNumber;
     this.streetName = props.streetName;
     this.city = props.city;

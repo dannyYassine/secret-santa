@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { assign } from 'lodash';
 
 export class BaseModel {
   
@@ -8,6 +9,8 @@ export class BaseModel {
   id;
   
   constructor(props = {}) {
+    assign(this, props);
+    
     this.id = uuidv4();
   }
 }

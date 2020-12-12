@@ -16,6 +16,7 @@
     "buefy": "^0.9.4",
     "core-js": "^3.6.5",
     "cypress": "^6.1.0",
+    "lodash": "^4.17.20",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "start-server-and-test": "^1.11.6",

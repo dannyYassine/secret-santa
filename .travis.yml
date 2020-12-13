@@ -16,15 +16,23 @@ branches:
 jobs:
   include:
   - stage: install-dependencies
-    name: Installing composer vendors
+    name: Install composer vendors
     language: php
     php: 7.4.12
     before_script:
     - cd api
     script:
     - composer install
+  - stage: install-dependencies
+    name: Install node_modules
+    language: node_js
+    node_js: 14.15.1
+    before_script:
+      - cd client
+    script:
+      - yarn install
   - stage: test
-    name: Run api tests
+    name: Run backend tests
     language: php
     php: 7.4.12
     before_script:
@@ -33,29 +41,8 @@ jobs:
     - php artisan key:generate
     script:
     - php artisan test
-  - stage: api-deploy
-    name: Deploy api to heroku
-    language: node_js
-    node_js: 14.15.1
-    script:
-    - echo *** DEPLOYING ***
-    deploy:
-      provider: heroku
-      api_key:
-        secure: kib/aOJW6k9kEEXASRbIAIeACToF0kq+sO48fqkWLGvn5u0+V2cajltlEweQPV6UwDwZZNvvSDp2MQTx2lxYh5YGj4F5bPhVVIdiaJJgZ5ZBJK74RMUaUIXkGSeHvklRY3rosTH9my7yDhwXljMo99U7KSHJMkhzBk85dumtaJV5K6zz5jFji/Nn0BVkgJIet2jlfqgtw7bClKxTBQjnbKgZZpamlLoD7wkoSXZBpzjL2QdN4zKkEqeyIMqPiQ5YQzxaCT8FKyydGXlkbEoWCItIBM0GaFrv3CZ2F1dv3psrMX5Zr80c3nPZaza+zem7H7wlJ/nP48nZkgfXZ22B2kCjQnAgzJlhgHP4MagyFu0ctjmk3rDrXyfOYjOvqaxdqis3IO0lAwBX4IFPGtzCI0558RWOIDmmo9lKnQgiM37+m2RH0YOGgaZy75tuzeizHUvImQgcjPoJDtJ4BumxIXt8ngE0YLDofj3viXb3j26o7RDD3E7QA2M78c8OE7OFmUnL4GbqAdWSMbDt7xRaLoxO/la6JPgYCPrc+Ev3xIpwhkDW7YjDNhyfGX/tXxIlt1CHnJqer0U9HQCa1LxNmZ20+04yn3FUTpDt5wS4UuIYqMDr0yT+MUSPjt2GyUcL8KRnuq5qzsa4H51ezav1wqXa01F+mgjsv4mNoljG8Mc=
-      app: dannyyassine-secret-santa
-      on: main
-      skip_cleanup: 'true'
-  - stage: install-dependencies
-    name: Installing node_modules
-    language: node_js
-    node_js: 14.15.1
-    before_script:
-    - cd client
-    script:
-    - yarn install
   - stage: test
-    name: Run client tests
+    name: Run cypress tests
     addons:
       apt:
         packages:
@@ -74,13 +61,26 @@ jobs:
     script:
     - yarn test
   - stage: test
-    name: Test client build
+    name: Test client production build
     language: node_js
     node_js: 14.15.1
     before_script:
       - cd client
     script:
       - yarn build
+  - stage: api-deploy
+    name: Deploy backend/api to Heroku
+    language: node_js
+    node_js: 14.15.1
+    script:
+      - echo *** DEPLOYING ***
+    deploy:
+      provider: heroku
+      api_key:
+        secure: kib/aOJW6k9kEEXASRbIAIeACToF0kq+sO48fqkWLGvn5u0+V2cajltlEweQPV6UwDwZZNvvSDp2MQTx2lxYh5YGj4F5bPhVVIdiaJJgZ5ZBJK74RMUaUIXkGSeHvklRY3rosTH9my7yDhwXljMo99U7KSHJMkhzBk85dumtaJV5K6zz5jFji/Nn0BVkgJIet2jlfqgtw7bClKxTBQjnbKgZZpamlLoD7wkoSXZBpzjL2QdN4zKkEqeyIMqPiQ5YQzxaCT8FKyydGXlkbEoWCItIBM0GaFrv3CZ2F1dv3psrMX5Zr80c3nPZaza+zem7H7wlJ/nP48nZkgfXZ22B2kCjQnAgzJlhgHP4MagyFu0ctjmk3rDrXyfOYjOvqaxdqis3IO0lAwBX4IFPGtzCI0558RWOIDmmo9lKnQgiM37+m2RH0YOGgaZy75tuzeizHUvImQgcjPoJDtJ4BumxIXt8ngE0YLDofj3viXb3j26o7RDD3E7QA2M78c8OE7OFmUnL4GbqAdWSMbDt7xRaLoxO/la6JPgYCPrc+Ev3xIpwhkDW7YjDNhyfGX/tXxIlt1CHnJqer0U9HQCa1LxNmZ20+04yn3FUTpDt5wS4UuIYqMDr0yT+MUSPjt2GyUcL8KRnuq5qzsa4H51ezav1wqXa01F+mgjsv4mNoljG8Mc=
+      app: dannyyassine-secret-santa
+      on: main
+      skip_cleanup: 'true'
   - stage: client-deploy
     name: Deploy client to Firebase
     language: node_js
@@ -102,4 +102,6 @@ stages:
 - install-dependencies
 - test
 - api-deploy
+  if: branch = main
 - client-deploy
+  if: branch = main

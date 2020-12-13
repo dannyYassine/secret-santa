@@ -56,14 +56,14 @@ jobs:
     - yarn install
   - stage: test
     name: Run client tests
-    language: node_js
-    node_js: 14.15.1
     addons:
       apt:
         packages:
           # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
           - libgconf-2-4
     before_script:
+    - nvm install stable
+    - nvm use stable
     - cd api
     - composer install
     - php artisan serve

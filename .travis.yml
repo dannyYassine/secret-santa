@@ -10,9 +10,6 @@ cache:
   - client/dist
   # we also need to cache folder with Cypress binary
   - /home/travis/.cache/Cypress
-branches:
-  only:
-  - main
 jobs:
   include:
   - stage: install-dependencies
@@ -100,7 +97,9 @@ jobs:
       cleanup: 'false'
 stages:
 - name: install-dependencies
+  if: type = pull_request
 - name: test
+  if: type = pull_request
 - name: api-deploy
   if: branch = main
 - name: client-deploy

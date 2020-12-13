@@ -1,6 +1,7 @@
 dist: xenial
 os: linux
 language: php
+php: 7.4.12
 cache:
   npm: true
   directories:

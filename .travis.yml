@@ -6,6 +6,8 @@ cache:
   - client/node_modules
   - api/vendor
   - client/dist
+  # we also need to cache folder with Cypress binary
+  - ~/.cache
 branches:
   only:
   - main

@@ -2,6 +2,7 @@ dist: xenial
 os: linux
 language: php
 cache:
+  npm: true
   directories:
   - client/node_modules
   - api/vendor

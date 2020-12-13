@@ -23,7 +23,7 @@ class DistributeFriendsService
 
     public function execute(DistributeFriendsDTO $dto): bool
     {
-        if (!count($dto->friends)) {
+        if (count($dto->friends) < 2) {
             return false;
         }
 

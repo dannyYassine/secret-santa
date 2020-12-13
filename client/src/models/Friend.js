@@ -21,6 +21,6 @@ export class Friend extends BaseModel {
     super(props);
     this.name = props.name;
     this.email = props.email;
-    this.address = props.address ? new Address(props.address) : null;
+    this.address = props.address ? new Address(props.address) : new Address();
   }
 }

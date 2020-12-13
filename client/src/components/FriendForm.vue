@@ -9,14 +9,17 @@
                data-e2e="friend-input-email">
       </b-input>
     </b-field>
+    <AddressForm :address="friend.address" />
   </div>
 </template>
 
 <script>
 import { Friend } from '@/models/Friend';
+import AddressForm from "@/components/AddressForm";
 
 export default {
   name: 'FriendForm',
+  components: {AddressForm},
   props: {
     friend: { type: Friend }
   }

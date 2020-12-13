@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Module;
 
-use App\Module\Models\Friend;
 use App\Module\Repositories\FriendRepository;
 use App\Module\Repositories\Mappers\FriendMapper;
 use App\Module\Services\DistributeFriendsDTO;
@@ -17,6 +16,22 @@ class DistributeFriendsServiceTest extends TestCase
         $this->assertNotNull(
             resolve(DistributeFriendsService::class)
         );
+    }
+
+    /**
+     * @dataProvider notEnoughFriendDataProvider
+     */
+    public function testReturnFalseWhenMissingFriends(array $friends)
+    {
+        $friendRepository = $this->createMock(FriendRepository::class);
+        $mailUtil = $this->createMock(MailUtil::class);
+        $mailUtil
+            ->method('sendInvite');
+
+        $service = new DistributeFriendsService($friendRepository, $mailUtil);
+        $result = $service->execute(new DistributeFriendsDTO(['friends' => $friends]));
+
+        $this->assertFalse($result);
     }
 
     public function testExecuteWhenEmptyFriends()
@@ -36,22 +51,22 @@ class DistributeFriendsServiceTest extends TestCase
     {
         $friend_json_1 = [
             'name' => 'Danny',
-            'email' => 'dannyyassine@gmail.com',
+            'email' => 'randomemail@randomemail.com',
             'address' => [
                 'street_number' => 125,
                 'street_name' => '2nd Avenue',
                 'city' => 'Verdun',
-                'postal_code' => 'H4G 2V4'
+                'postal_code' => 'A1A 1A1'
             ]
         ];
         $friend_json_2 = [
             'name' => 'Danny1',
-            'email' => 'dannyyassine+1@gmail.com',
+            'email' => 'randomemail+1@randomemail.com',
             'address' => [
                 'street_number' => 125,
                 'street_name' => '2nd Avenue',
                 'city' => 'Verdun',
-                'postal_code' => 'H4G 2V4'
+                'postal_code' => 'A1A 1A1'
             ]
         ];
         $friend1 = FriendMapper::toFriend(json_decode(json_encode($friend_json_1)));
@@ -72,5 +87,26 @@ class DistributeFriendsServiceTest extends TestCase
         $result = $service->execute(new DistributeFriendsDTO(['friends' => [$friend_json_1, $friend_json_2]]));
 
         $this->assertTrue($result);
+    }
+
+    public function notEnoughFriendDataProvider()
+    {
+        return [
+            'No friends' => [[]],
+            'One friend' => [
+                [
+                    [
+                        'name' => 'Danny1',
+                        'email' => 'randomemail@randomemail.com',
+                        'address' => [
+                            'street_number' => 125,
+                            'street_name' => '2nd Avenue',
+                            'city' => 'Verdun',
+                            'postal_code' => 'H4G 2V4'
+                        ]
+                    ]
+                ]
+            ]
+        ];
     }
 }

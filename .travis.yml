@@ -7,7 +7,7 @@ cache:
   - api/vendor
   - client/dist
   # we also need to cache folder with Cypress binary
-  - ~/.cache
+  - /home/travis/.cache/Cypress
 branches:
   only:
   - main

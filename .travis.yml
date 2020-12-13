@@ -100,9 +100,9 @@ jobs:
       cleanup: 'false'
 stages:
 - name: install-dependencies
-  if: type = pull_request OR (branch = master AND type = push)
+  if: type = pull_request OR (branch = main AND type = push)
 - name: test
-  if: type = pull_request  OR (branch = master AND type = push)
+  if: type = pull_request  OR (branch = main AND type = push)
 - name: api-deploy
   if: (branch = main) AND (type = push)
 - name: client-deploy

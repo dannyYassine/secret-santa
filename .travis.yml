@@ -64,6 +64,7 @@ jobs:
           - libgconf-2-4
     before_script:
     - cd client
+    - yarn test:cypress:install
     script:
     - yarn test
   - stage: test

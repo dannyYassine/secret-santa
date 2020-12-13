@@ -69,6 +69,7 @@ jobs:
     - php artisan serve &
     - cd ..
     - cd client
+    - yarn install
     - yarn test:cypress:install
     script:
     - yarn test

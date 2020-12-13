@@ -2,7 +2,7 @@
 export class AppPageobject {
   
   visit() {
-    cy.visit(`${Cypress.env('CLIENT_URL') || 'http://localhost:3000'}`);
+    cy.visit(`${Cypress.env('CLIENT_URL') || 'http://localhost:8080'}`);
   }
   
   getAddFriendButton() {

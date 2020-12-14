@@ -8,6 +8,11 @@ class Friend
     public string $email;
     public ?Address $address;
 
+    public function __construct()
+    {
+        $this->address = null;
+    }
+
     public function isEqual(Friend $friend): bool
     {
         return $this->name === $friend->name;

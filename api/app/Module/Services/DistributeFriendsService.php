@@ -35,7 +35,9 @@ class DistributeFriendsService
 
             $this->send($friends_recipients);
         } catch (\Throwable $e) {
-            throw $e;
+//            throw $e;
+            echo "ERROR: ". $e->getMessage();
+            return false;
         }
 
         return true;

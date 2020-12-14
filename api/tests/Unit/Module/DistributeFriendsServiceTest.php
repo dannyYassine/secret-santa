@@ -9,10 +9,13 @@ use App\Module\Services\DistributeFriendsDTO;
 use App\Module\Services\DistributeFriendsService;
 use App\Module\Utils\Mail\MailUtil;
 use Illuminate\Validation\ValidationException;
+use Tests\DataProviders\MissingFriendsDataProvider;
 use Tests\TestCase;
 
 class DistributeFriendsServiceTest extends TestCase
 {
+    use MissingFriendsDataProvider;
+
     public function testShouldResolveDependencies()
     {
         $this->assertNotNull(
@@ -89,25 +92,5 @@ class DistributeFriendsServiceTest extends TestCase
         $result = $service->execute(new DistributeFriendsDTO(['friends' => [$friend_json_1, $friend_json_2]]));
 
         $this->assertTrue($result);
-    }
-
-    public function notEnoughFriendsDataProvider()
-    {
-        return [
-            'One friend' => [
-                [
-                    [
-                        'name' => 'Danny1',
-                        'email' => 'randomemail@randomemail.com',
-                        'address' => [
-                            'street_number' => 125,
-                            'street_name' => '2nd Avenue',
-                            'city' => 'Verdun',
-                            'postal_code' => 'H4G 2V4'
-                        ]
-                    ]
-                ]
-            ]
-        ];
     }
 }

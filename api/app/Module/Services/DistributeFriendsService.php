@@ -2,6 +2,7 @@
 
 namespace App\Module\Services;
 
+use App\Module\Exceptions\MinimumRequiredFriendsException;
 use App\Module\Models\Friend;
 use App\Module\Repositories\FriendRepository;
 use App\Module\Utils\Mail\MailUtil;
@@ -24,7 +25,7 @@ class DistributeFriendsService
     public function execute(DistributeFriendsDTO $dto): bool
     {
         if (count($dto->friends) < 2) {
-            throw new \Error('Need at least two friends to send invites');
+            throw new MinimumRequiredFriendsException();
         }
 
         try {

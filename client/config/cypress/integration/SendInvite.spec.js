@@ -30,7 +30,7 @@ context('Send invites Page', () => {
     appPageObject.getAddFriendButton().click();
   
     appPageObject.getFriendNameInput(2).type('Danny2');
-    appPageObject.getFriendEmailInput(2).type('dannyyassine++2@gmail.com');
+    appPageObject.getFriendEmailInput(2).type('dannyyassine+2@gmail.com');
     appPageObject.getAddressStreetNumberInput(2).type('125');
     appPageObject.getAddressStreetNameInput(2).type('1 1st Avenue');
     appPageObject.getAddressCityInput(2).type('Montreal');

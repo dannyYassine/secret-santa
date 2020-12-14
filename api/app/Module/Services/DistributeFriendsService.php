@@ -28,17 +28,9 @@ class DistributeFriendsService
             throw new MinimumRequiredFriendsException();
         }
 
-        try {
-            $this->friends_count = count($dto->friends);
-
-            $friends_recipients = $this->createRecipients($dto->friends);
-
-            $this->send($friends_recipients);
-        } catch (\Throwable $e) {
-//            throw $e;
-            echo "ERROR: ". $e->getMessage();
-            return false;
-        }
+        $this->friends_count = count($dto->friends);
+        $friends_recipients = $this->createRecipients($dto->friends);
+        $this->send($friends_recipients);
 
         return true;
     }

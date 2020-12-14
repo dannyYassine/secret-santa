@@ -179,6 +179,8 @@
             font-size: 15px;
             line-height: 1.8;
             color: rgba(0,0,0,.4);
+
+            background: url('/mail/xmas_tile.jpg') round;
         }
 
         a{
@@ -376,6 +378,7 @@
             </tr><!-- end tr -->
             <!-- 1 Column Text + Button : END -->
         </table>
+        @if(!is_null($recipient->address))
         <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
             <tr>
                 <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
@@ -395,7 +398,7 @@
                 </td>
             </tr>
         </table>
-
+        @endif
     </div>
 </center>
 </body>

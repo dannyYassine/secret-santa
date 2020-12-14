@@ -24,7 +24,7 @@ class DistributeFriendsService
     public function execute(DistributeFriendsDTO $dto): bool
     {
         if (count($dto->friends) < 2) {
-            return false;
+            throw new \Error('Need at least two friends to send invites');
         }
 
         try {
@@ -34,7 +34,7 @@ class DistributeFriendsService
 
             $this->send($friends_recipients);
         } catch (\Throwable $e) {
-            return false;
+            throw $e;
         }
 
         return true;

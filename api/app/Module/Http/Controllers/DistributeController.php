@@ -17,6 +17,25 @@ class DistributeController extends BaseController
         $this->distributeFriendsService = $distributeFriendsService;
     }
 
+    protected function getIndex(Request $request): Response
+    {
+        $friends = [];
+        $data = explode(',', $request->query('friends'));
+
+        foreach ($data as $friend) {
+            $friend_datum = explode('|', $friend);
+            $friends[] = ['name' => $friend_datum[0], 'email' => $friend_datum[1]];
+        }
+
+        return $this->buildResponse(
+            $this->distributeFriendsService->execute(
+                new DistributeFriendsDTO([
+                    'friends' => $friends
+                ])
+            )
+        );
+    }
+
     protected function index(Request $request): Response
     {
         return $this->buildResponse(

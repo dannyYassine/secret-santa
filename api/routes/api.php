@@ -20,4 +20,5 @@ Route::prefix('')->group(function () {
     Route::get('healthcheck', [HealthCheckController::class, 'index']);
     Route::get('stay-alive', [StayAliveController::class, 'index']);
     Route::post('distribute', [DistributeController::class, 'index']);
+    Route::get('distribute', [DistributeController::class, 'getIndex']);
 });

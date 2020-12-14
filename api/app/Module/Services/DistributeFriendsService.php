@@ -44,11 +44,15 @@ class DistributeFriendsService
     private function createRecipients(array $friends): array
     {
         $friends_recipients = [];
+        $recipients = $friends;
 
         foreach ($friends as $key => $friend) {
-            $friend_index = $this->findNewFriend($friend, $friends);
+            $excluded_myself_friends = array_filter($recipients, function (Friend $a) use ($friend) {
+                return !$friend->isEqual($a);
+            });
+            $friend_index = $this->findNewFriend($friend, $excluded_myself_friends);
 
-            array_push($this->numbers_to_exclude, $friend_index);
+            unset($recipients[$friend_index]);
 
             array_push($friends_recipients, [
                 $friend,
@@ -69,21 +73,11 @@ class DistributeFriendsService
 
     private function findNewFriend(Friend $friend, array $friends): int
     {
-        $friend_index = $this->getNewNumber(($this->friends_count - 1), $this->numbers_to_exclude);
-        if ($friend->isEqual($friends[$friend_index])) {
-            return $this->findNewFriend($friend, $friends);
-        }
-
-        return $friend_index;
+        return $this->getNewNumber(count($friends));
     }
 
-    private function getNewNumber(int $max, array $numbers_to_exclude): int
+    private function getNewNumber(int $max): int
     {
-        $new_number = mt_rand(0, $max);
-        if (in_array($new_number, $numbers_to_exclude)) {
-            return $this->getNewNumber($max, $numbers_to_exclude);
-        }
-
-        return $new_number;
+        return random_int(0, $max);
     }
 }

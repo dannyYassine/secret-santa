@@ -101,7 +101,6 @@ class DistributeFriendsServiceTest extends TestCase
      */
     public function testExecuteWithMultipleFriends($friends)
     {
-        echo json_encode($friends);
         $friendRepository = $this->createMock(FriendRepository::class);
         $mailUtil = $this->createMock(MailUtil::class);
         $mailUtil

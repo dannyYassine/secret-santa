@@ -44,7 +44,7 @@ class DistributeFriendsService
             $excluded_myself_friends = array_values($excluded_myself_friends);
 
             if (empty($excluded_myself_friends)) {
-                $this->swapLastPerson($friend, $friends_recipients);
+                $this->swapLastPerson($friends_recipients, $friend);
                 return $friends_recipients;
             }
 
@@ -63,7 +63,7 @@ class DistributeFriendsService
         return $friends_recipients;
     }
 
-    private function swapLastPerson(&$friends_recipients, $friend, $index = 0): void
+    private function swapLastPerson(array &$friends_recipients, Friend $friend, int $index = 0): void
     {
         $friends_recipient = $friends_recipients[$index];
         $recipient = $friends_recipient[1];

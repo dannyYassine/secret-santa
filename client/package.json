@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "start-server-and-test serve http://localhost:8080 test:cypress:run",
+    "test": "start-server-and-test serve \"http://localhost:8000|http://localhost:8080\" test:cypress:run",
     "test:cypress:install": "cypress install",
     "test:cypress:open": "./node_modules/.bin/cypress open",
     "test:cypress:run": "./node_modules/.bin/cypress run",

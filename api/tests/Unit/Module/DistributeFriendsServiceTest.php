@@ -9,12 +9,14 @@ use App\Module\Services\DistributeFriendsDTO;
 use App\Module\Services\DistributeFriendsService;
 use App\Module\Utils\Mail\MailUtil;
 use Illuminate\Validation\ValidationException;
+use Tests\DataProviders\FriendsDataProvider;
 use Tests\DataProviders\MissingFriendsDataProvider;
 use Tests\TestCase;
 
 class DistributeFriendsServiceTest extends TestCase
 {
-    use MissingFriendsDataProvider;
+    use MissingFriendsDataProvider,
+        FriendsDataProvider;
 
     public function testShouldResolveDependencies()
     {
@@ -90,6 +92,26 @@ class DistributeFriendsServiceTest extends TestCase
 
         $service = new DistributeFriendsService($friendRepository, $mailUtil);
         $result = $service->execute(new DistributeFriendsDTO(['friends' => [$friend_json_1, $friend_json_2]]));
+
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @dataProvider multipleFriendsIteration
+     */
+    public function testExecuteWithMultipleFriends($friends)
+    {
+        echo json_encode($friends);
+        $friendRepository = $this->createMock(FriendRepository::class);
+        $mailUtil = $this->createMock(MailUtil::class);
+        $mailUtil
+            ->method('sendInvites')
+            ->with($this->callback(function ($friend_recipients) {
+                return !!count($friend_recipients);
+            }));
+
+        $service = new DistributeFriendsService($friendRepository, $mailUtil);
+        $result = $service->execute(new DistributeFriendsDTO(['friends' => $friends]));
 
         $this->assertTrue($result);
     }

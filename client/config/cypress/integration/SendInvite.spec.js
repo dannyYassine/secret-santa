@@ -3,7 +3,7 @@ import { AppPageobject } from '../pageobjects/App.pageobject';
 context('Send invites Page', () => {
   it('should send invites with at least 3 friends', () => {
     cy.server()
-    cy.route('POST', '/api/distribute').as('distribute')
+    cy.route('POST', 'http://localhost:8000/api/distribute').as('distribute')
     
     const appPageObject = new AppPageobject();
   

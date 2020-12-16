@@ -2,15 +2,22 @@
 
 namespace Tests\Unit\Module;
 
+use App\Module\Exceptions\MinimumRequiredFriendsException;
 use App\Module\Repositories\FriendRepository;
 use App\Module\Repositories\Mappers\FriendMapper;
 use App\Module\Services\DistributeFriendsDTO;
 use App\Module\Services\DistributeFriendsService;
 use App\Module\Utils\Mail\MailUtil;
+use Illuminate\Validation\ValidationException;
+use Tests\DataProviders\FriendsDataProvider;
+use Tests\DataProviders\MissingFriendsDataProvider;
 use Tests\TestCase;
 
 class DistributeFriendsServiceTest extends TestCase
 {
+    use MissingFriendsDataProvider,
+        FriendsDataProvider;
+
     public function testShouldResolveDependencies()
     {
         $this->assertNotNull(
@@ -19,32 +26,32 @@ class DistributeFriendsServiceTest extends TestCase
     }
 
     /**
-     * @dataProvider notEnoughFriendDataProvider
+     * @dataProvider notEnoughFriendsDataProvider
      */
-    public function testReturnFalseWhenMissingFriends(array $friends)
+    public function testThrowExceptionWhenMissingRequiredFriends(array $friends)
     {
+        $this->expectException(MinimumRequiredFriendsException::class);
+
         $friendRepository = $this->createMock(FriendRepository::class);
         $mailUtil = $this->createMock(MailUtil::class);
         $mailUtil
             ->method('sendInvite');
 
         $service = new DistributeFriendsService($friendRepository, $mailUtil);
-        $result = $service->execute(new DistributeFriendsDTO(['friends' => $friends]));
-
-        $this->assertFalse($result);
+        $service->execute(new DistributeFriendsDTO(['friends' => $friends]));
     }
 
     public function testExecuteWhenEmptyFriends()
     {
+        $this->expectException(ValidationException::class);
+
         $friendRepository = $this->createMock(FriendRepository::class);
         $mailUtil = $this->createMock(MailUtil::class);
         $mailUtil
             ->method('sendInvite');
 
         $service = new DistributeFriendsService($friendRepository, $mailUtil);
-        $result = $service->execute(new DistributeFriendsDTO(['friends' => []]));
-
-        $this->assertFalse($result);
+        $service->execute(new DistributeFriendsDTO(['friends' => []]));
     }
 
     public function testExecuteWhenFriends()
@@ -89,24 +96,22 @@ class DistributeFriendsServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function notEnoughFriendDataProvider()
+    /**
+     * @dataProvider multipleFriendsIteration
+     */
+    public function testExecuteWithMultipleFriends($friends)
     {
-        return [
-            'No friends' => [[]],
-            'One friend' => [
-                [
-                    [
-                        'name' => 'Danny1',
-                        'email' => 'randomemail@randomemail.com',
-                        'address' => [
-                            'street_number' => 125,
-                            'street_name' => '2nd Avenue',
-                            'city' => 'Verdun',
-                            'postal_code' => 'H4G 2V4'
-                        ]
-                    ]
-                ]
-            ]
-        ];
+        $friendRepository = $this->createMock(FriendRepository::class);
+        $mailUtil = $this->createMock(MailUtil::class);
+        $mailUtil
+            ->method('sendInvites')
+            ->with($this->callback(function ($friend_recipients) {
+                return !!count($friend_recipients);
+            }));
+
+        $service = new DistributeFriendsService($friendRepository, $mailUtil);
+        $result = $service->execute(new DistributeFriendsDTO(['friends' => $friends]));
+
+        $this->assertTrue($result);
     }
 }

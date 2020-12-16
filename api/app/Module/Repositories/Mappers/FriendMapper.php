@@ -24,6 +24,8 @@ class FriendMapper
 
         if (isset($json->address) && !is_null($json->address)) {
             $friend->address = AddressMapper::toAddress($json->address);
+        } else {
+            $friend->address = null;
         }
 
         return $friend;

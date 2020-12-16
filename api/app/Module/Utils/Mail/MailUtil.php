@@ -16,16 +16,17 @@ class MailUtil
         }
     }
 
-    public function sendInvite(Friend $sender, Friend $recipient): void
+    public function sendInvite(Friend $sender, Friend $recipient): bool
     {
         try {
             Mail::send(['html' => 'invite'], ['sender' => $sender, 'recipient' => $recipient], function ($message) use ($sender) {
-                $message->to($sender->email, $sender->name)->subject
-                ('Secret Santa');
+                $message->to($sender->email, $sender->name)->subject('Secret Santa');
                 $message->from('dannyyassine@gmail.com','Danny Yassine');
             });
         } catch (\Throwable $e) {
-            throw $e;
+            return false;
         }
+
+        return true;
     }
 }

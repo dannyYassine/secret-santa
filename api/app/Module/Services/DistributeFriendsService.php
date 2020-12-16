@@ -2,14 +2,13 @@
 
 namespace App\Module\Services;
 
+use App\Module\Exceptions\MinimumRequiredFriendsException;
 use App\Module\Models\Friend;
 use App\Module\Repositories\FriendRepository;
 use App\Module\Utils\Mail\MailUtil;
 
 class DistributeFriendsService
 {
-    private array $numbers_to_exclude = [];
-    private int $friends_count = 0;
     private array $friends = [];
 
     public MailUtil $mailUtil;
@@ -24,18 +23,11 @@ class DistributeFriendsService
     public function execute(DistributeFriendsDTO $dto): bool
     {
         if (count($dto->friends) < 2) {
-            return false;
+            throw new MinimumRequiredFriendsException();
         }
 
-        try {
-            $this->friends_count = count($dto->friends);
-
-            $friends_recipients = $this->createRecipients($dto->friends);
-
-            $this->send($friends_recipients);
-        } catch (\Throwable $e) {
-            return false;
-        }
+        $friends_recipients = $this->createRecipients($dto->friends);
+        $this->send($friends_recipients);
 
         return true;
     }
@@ -43,19 +35,43 @@ class DistributeFriendsService
     private function createRecipients(array $friends): array
     {
         $friends_recipients = [];
+        $bin_recipients = $friends;
 
         foreach ($friends as $key => $friend) {
-            $friend_index = $this->findNewFriend($friend, $friends);
+            $excluded_myself_friends = array_filter($bin_recipients, function (Friend $a) use ($friend) {
+                return !$friend->isEqual($a);
+            });
+            $excluded_myself_friends = array_values($excluded_myself_friends);
 
-            array_push($this->numbers_to_exclude, $friend_index);
+            if (empty($excluded_myself_friends)) {
+                $this->swapLastPerson($friends_recipients, $friend);
+                return $friends_recipients;
+            }
+
+            $friend_index = $this->findNewFriend($excluded_myself_friends);
 
             array_push($friends_recipients, [
                 $friend,
-                $friends[$friend_index]
+                $excluded_myself_friends[$friend_index]
             ]);
+
+            $bin_recipients = array_filter($bin_recipients, function (Friend $a) use ($excluded_myself_friends, $friend_index) {
+                return !$a->isEqual($excluded_myself_friends[$friend_index]);
+            });
         }
 
         return $friends_recipients;
+    }
+
+    private function swapLastPerson(array &$friends_recipients, Friend $friend, int $index = 0): void
+    {
+        $friends_recipient = $friends_recipients[$index];
+        $recipient = $friends_recipient[1];
+        $friends_recipient[1] = $friend;
+        array_push($friends_recipients, [
+            $friend,
+            $recipient
+        ]);
     }
 
     /**
@@ -66,23 +82,13 @@ class DistributeFriendsService
         $this->mailUtil->sendInvites($friends_recipients);
     }
 
-    private function findNewFriend(Friend $friend, array $friends): int
+    private function findNewFriend(array $friends): int
     {
-        $friend_index = $this->getNewNumber(($this->friends_count - 1), $this->numbers_to_exclude);
-        if ($friend->isEqual($friends[$friend_index])) {
-            return $this->findNewFriend($friend, $friends);
-        }
-
-        return $friend_index;
+        return $this->getNewNumber(count($friends) - 1);
     }
 
-    private function getNewNumber(int $max, array $numbers_to_exclude): int
+    private function getNewNumber(int $max): int
     {
-        $new_number = mt_rand(0, $max);
-        if (in_array($new_number, $numbers_to_exclude)) {
-            return $this->getNewNumber($max, $numbers_to_exclude);
-        }
-
-        return $new_number;
+        return random_int(0, $max);
     }
 }
